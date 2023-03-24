@@ -136,6 +136,8 @@ def next_questions():
 
 
 print('hello')
+
+print('hello')
 k.clicked.connect(check_answer)
 okno.show()
 app.exec_()
