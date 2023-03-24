@@ -135,8 +135,7 @@ def next_questions():
     ask(questions_list[okno.l])
 
 
-
-
+print('hello')
 k.clicked.connect(check_answer)
 okno.show()
 app.exec_()
