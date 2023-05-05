@@ -1,20 +1,20 @@
 import pygame
-from random import *
+from random import randrange
 pygame.init()
 length = 1
 game = True
 FPS = 50
 x = 350
 y = 250
+eda = 0
 
-x2 = randint(0,700)
-y2 = randint(0,500)
-apple = x2,y2
+apple = randrange(20,300,50),randrange(20,300,50)
+
 
 snake = [(x,y)]
 direction = ''
 
-okno = pygame.display.set_mode((700,500))
+okno = pygame.display.set_mode((1200,1000))
 pygame.display.set_caption('Змейка')
 
 
@@ -25,8 +25,10 @@ while game:
         if e.type == pygame.QUIT:
             game = False
     okno.fill((255,255,255)) 
-    [(pygame.draw.rect(okno,(102,255,0),(x,y,30,30))) for x,y in snake]
-    pygame.draw.rect(okno,(255,0,0),(x2,y2,20,20))
+    [(pygame.draw.rect(okno,(102,255,0),(x,y,40,40))) for x,y in snake]
+    pygame.draw.rect(okno,(255,0,0),(*apple,40,40))
+    f1 = pygame.font.Font(None, 36)
+    text1 = f1.render(('Счёт: ' + str(eda)), True,(180, 0, 0))
 
     snake.append((x,y))
     snake = snake[-length:]
@@ -54,9 +56,23 @@ while game:
     if keys[pygame.K_q]:
         game = False
     
-    if snake == x2 and  snake == y2:
-        pygame.draw.rect(okno,(255,0,0),(x2,y2,20,20))
-        length += 1
+    if x <= -10:
+        x = 1200
+        direction = 'left'
+    if x >= 1200:
+        x = 0
+        direction = 'right'
+    if y <= 10:
+        y = 1000
+        direction = 'ip'
+    if x >= 1000:
+        y = 0
+        direction = 'down'
 
+    if snake[-1] == apple:
+        apple = randrange(20,300,50),randrange(20,300,50)
+        length += 5
+        eda += 1
+    okno.blit(text1, (10, 20))
     pygame.display.update()
     time.tick(FPS)
