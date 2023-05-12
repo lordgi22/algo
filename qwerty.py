@@ -56,23 +56,25 @@ while game:
     if keys[pygame.K_q]:
         game = False
     
-    if x <= -10:
+    if x < 0:
         x = 1200
-        direction = 'left'
-    if x >= 1200:
+        #direction = 'left'
+    if x > 1200:
         x = 0
-        direction = 'right'
-    if y <= 10:
+        #rection = 'right'
+    if y < 0:
         y = 1000
-        direction = 'ip'
-    if x >= 1000:
+        #direction = 'ip'
+    if y > 1000:
         y = 0
-        direction = 'down'
+        #direction = 'down'
 
     if snake[-1] == apple:
         apple = randrange(20,300,50),randrange(20,300,50)
         length += 5
         eda += 1
+    if snake[-1] == snake:
+        game = False
     okno.blit(text1, (10, 20))
     pygame.display.update()
     time.tick(FPS)
